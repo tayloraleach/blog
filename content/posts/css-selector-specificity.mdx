@@ -1,0 +1,62 @@
+---
+title: What is CSS selector specificity and how does it work?
+date: 2024-03-28
+category: CSS
+tags:
+  - Fundamentals
+  - Interview Prep Question
+---
+
+CSS selector specificity is a set of rules used to determine what styles get applied to what elements on the page. Each has a weight which you can use to calculate what will take priority.
+
+| Selector Type             | Weight |
+|---------------------------|--------|
+| Inline styles             | 1-0-0-0|
+| ID selectors              | 1-0-0  |
+| Class selectors           | 0-1-0  |
+| Attribute selectors       | 0-1-0  |
+| Pseudo-classes            | 0-1-0  |
+| Type selectors            | 0-0-1  |
+| Pseudo-elements           | 0-0-1  |
+| Universal selector (*)    | 0      |
+
+### **Inline styles** have the highest weight and will always overrule any selectors. (1-0-0-0) 
+
+The only way to override an inline style is by using `important!`
+
+```html:html
+<p style="color: tomato;">hello world</p>
+```
+
+### ID
+
+ID selectors have the highest weight of any selector (1-0-0)
+
+```css:css
+#card { ... }
+```
+
+### CLASS
+
+Class, attribute, and pseudo-class selectors all have medium weight (0-1-0)
+
+```css:css
+.element { ... }
+input[type='submit'] { ... }
+input:checked { ... }
+```
+
+### TYPE
+
+Type and pseudo-element selectors are the lowest weight (0-0-1)
+
+```css:css
+p { ... }
+p::before { ... }
+```
+
+_Double colons (::) are used for pseudo-elements. This distinguishes pseudo-elements from pseudo-classes that use single colon (:) in their notation_
+
+When multiple conflicting styles are defined, the browser determines which style to apply based on the 
+specificity of the selectors. If two or more conflicting styles have the same specificity, 
+the one defined later in the CSS document or with a higher specificity in the cascade takes precedence.
