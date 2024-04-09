@@ -1,8 +1,4 @@
-# Next App Router Blog
-
-A Next.js blog for developers using the new App Router.
-
-Thanks to [@shadcn](https://github.com/shadcn) and his work on [next-contentlayer](https://github.com/shadcn/next-contentlayer). It was used as a starting point for this repository.
+# Blog
 
 ## Features
 
@@ -49,3 +45,5 @@ Building the project
 ```bash
 npm run build
 ```
+
+> Thanks to stevenspads and his work on [next-app-router-blog](https://github.com/stevenspads/next-app-router-blog) to help me kickstart this project
