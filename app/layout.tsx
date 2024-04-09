@@ -10,8 +10,7 @@ import { fontSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 const title = 'taylorleach blog';
-const description =
-  'A Next.js markdown blog for developers using the new App Router.';
+const description = 'A Next.js markdown blog for developers using the new App Router.';
 export const metadata = {
   metadataBase: process.env.NEXT_PUBLIC_SITE_URL,
   title: {
@@ -19,14 +18,7 @@ export const metadata = {
     template: `%s | ${title}`,
   },
   description,
-  keywords: [
-    'Web Development',
-    'HTML',
-    'CSS',
-    'JavaScript',
-    'TypeScript',
-    'React',
-  ],
+  keywords: ['Web Development', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React'],
   authors: [
     {
       name: 'taylorleach',
@@ -61,11 +53,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable
-        )}>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="mx-auto max-w-2xl px-4 pb-10 pt-6">
             <Header />

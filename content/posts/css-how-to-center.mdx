@@ -9,7 +9,6 @@ tags:
   - Interview Prep Question
 ---
 
-
 ```html
 <div class="parent>
     <div class="child"></div>
@@ -18,13 +17,13 @@ tags:
 
 ## Flex
 
-Simplest approach with is `display: flex` + `align-items` and `justify-content` set to  `center`
+Simplest approach with is `display: flex` + `align-items` and `justify-content` set to `center`
 
 ```css
 .parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ```
 
@@ -34,8 +33,8 @@ Setting the `display` property of the parent element to `grid` combined with `pl
 
 ```css
 .parent {
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 }
 ```
 
@@ -45,14 +44,14 @@ Using absolute positioning along with `top`, `left`, and `transform`. Make sure 
 
 ```css
 .parent {
-    position: relative;
+  position: relative;
 }
 
 .child {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 ```
 
@@ -62,15 +61,15 @@ Using absolute positioning combined with setting negative margins equal to half 
 
 ```css
 .parent {
-    position: relative;
+  position: relative;
 }
 
 .child {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -25px 0 0 -25px;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
 }
 ```

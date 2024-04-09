@@ -21,11 +21,7 @@ export function ThemeSwitcher() {
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       className="flex h-6 w-6 items-center justify-center rounded-md border">
       <span className="sr-only">Toggle mode</span>
-      {theme === 'dark' ? (
-        <SunIcon className="h-4 w-4" />
-      ) : (
-        <MoonIcon className="h-4 w-4" />
-      )}
+      {theme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
     </button>
   );
 }
