@@ -1,0 +1,93 @@
+---
+title: How to control the brightness of your monitor from the command line in Linux
+date: 2024-04-12
+category: Tutorial
+tags:
+  - Linux
+  - Terminal
+  - Software
+---
+
+If you're like me and work in a space where the amount of sunlight fluctuates drastically throughout the day, then it's likely you're constantly adjust your monitors brightness to compensate. 
+
+Turns out it's really simple to control the brightness of your monitor from the command line without having to muck with the OSD. I have specific increments aliased for quick use.
+
+I use a 27" 4k Dell (U2723QE) monitor connected via thunderbolt to my Dell Precision 5570 laptop.
+
+## ddccontrol
+
+<small className="text-gray-500">(It looks like this project is no longer being updated but it still works well for my needs so I thought it was still worth sharing)</small>
+
+> DDCcontrol is a software used to control monitor parameters, like brightness, contrast, RGB color levels and others.
+
+There are likely others, but I found this tool worked well for me. The full installation instructions can be found on [GitHub](https://github.com/ddccontrol/ddccontrol). I'm using a flavour of Ubuntu (Pop!_OS) so I use apt.
+
+This tool changes the brightness of the monitor **at the hardware level** and I've seen a lot of other methods that just use software to effectively 'dim' the screen which is not what I wanted.
+
+```bash
+sudo apt install ddccontrol ddccontrol-db i2c-tools
+```
+
+__*You might need to restart your system after installing i2c-tools.__
+
+Once installed, give it a shot by running the following command to probe for your monitor:
+
+```bash
+sudo ddccontrol -p
+```
+
+The output should contain some information about the device identifier, and the value that aligns with brightness control.
+
+```bash {6,16}
+Detected monitors :
+ - Device: dev:/dev/i2c-12
+   DDC/CI supported: No
+   Monitor Name: VESA standard monitor
+   Input type: Digital
+ - Device: dev:/dev/i2c-16 # <-- my external monitor
+   DDC/CI supported: Yes
+   Monitor Name: VESA standard monitor
+   Input type: Digital
+  (Automatically selected)
+
+...
+
+Controls (valid/current/max) [Description - Value name]:
+...
+Control 0x10: +/50/100 C [Brightness]
+
+```
+
+I received a warning but was able to safely ignore it and move on.
+
+<ErrorText>There is no support for your monitor in the database, but ddccontrol is using a basic generic profile</ErrorText>
+
+`dev:/dev/i2c-12` is my external monitor, and `0x10` is the control we are targeting.
+
+To read the monitors current brightness value (percentage), use the `-r` flag:
+
+```bash
+sudo ddccontrol -r 0x10 dev:/dev/i2c-16
+```
+
+ To write the monitors brightness level, use the `-w` flag:
+
+```bash
+ sudo ddccontrol -r 0x10 -w 85 dev:/dev/i2c-16
+ ```
+
+ ## Alias
+
+I like my monitor brightness to be very low in the morning when I wake up, and I crank it up higher when the sunlight finds its way into my office in the afternoons.
+
+I added a few alias commands to my `.bashrc` file to quickly toggle between 10%, 50%, and 85% brightness:
+
+```bash:.bashrc
+alias b10='sudo ddccontrol -r 0x10 -w 10 dev:/dev/i2c-16 > /dev/null 2>&1'
+alias b50='sudo ddccontrol -r 0x10 -w 50 dev:/dev/i2c-16 > /dev/null 2>&1'
+alias b85='sudo ddccontrol -r 0x10 -w 85 dev:/dev/i2c-16 > /dev/null 2>&1'
+```
+
+I added [> /dev/null 2>&1](https://askubuntu.com/a/474566/922639) to prevent all the warning messages from being dumped to the screen.
+
+You're future eyeballs will thank you 👀
