@@ -1,0 +1,28 @@
+---
+title: How to visually debug CSS z-index issues in 3D
+date: 2024-05-03
+category: CSS
+tags:
+  - Dev Tools
+image: '/posts/edge-z-index.png'
+---
+
+Debugging complicated CSS [z-index](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) issues on your website can be difficult and time consuming, but luckily there is a handy developer tool to help isolate nested stacking contexts and visualize the layers in a 3D view.
+
+## Layers Panel in Chrome
+
+As of this writing, it seems that Chrome is [considering deprecating](https://issues.chromium.org/issues/328948996) the Layers panel but I really wanted to play with this feature so this gave me an excuse to download the Microsoft Edge browser.
+
+<Image src="/posts/chrome-layers-deprecated.png" width="640" height="95" alt="chrome layers panel deprecated screenshot" / >
+
+
+## 3D View in Edge
+
+<Image src="/posts/edge-3d-view.png" width="640" height="112" alt="microsoft edge browser 3d view command palette" / >
+
+- Press `ctrl+shift+P` (`cmd+shift+P` on macOS) to bring up the command palette
+- Type "3D View" and select 3D View
+- Select `Z-index` tab from the sidebar
+
+
+You will be able to pan and scroll around a 3D representation of your website. You can hover over elements and see where elements might be overlapping in ways you did not expect. I found this particularly useful when creating elements with click masks or just in general when working with deeply nested absolutely positioned elements.
